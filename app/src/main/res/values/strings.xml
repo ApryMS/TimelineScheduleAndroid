@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TimelineSchedule</string>
+    <string name="tagline">Chandra Superstore Timeline Scadule</string>
+    <string name="silahkan_masuk">Silahkan Masuk</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="masuk">Masuk</string>
+    <string name="dekorasi">Dekorasi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
