@@ -8,4 +8,8 @@
     <string name="dekorasi">Dekorasi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_name">Name</string>
+    <string name="prosess">Di Proses</string>
+    <string name="selesai">Selesai</string>
+    <string name="no_data">No Data</string>
 </resources>

@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TimelineSchedule"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false" />
@@ -40,4 +44,3 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
-<!--    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-->

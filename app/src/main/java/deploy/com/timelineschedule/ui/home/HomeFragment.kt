@@ -1,60 +1,90 @@
 package deploy.com.timelineschedule.ui.home
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.ViewCompat
 import deploy.com.timelineschedule.R
+import deploy.com.timelineschedule.databinding.FragmentHomeBinding
+import deploy.com.timelineschedule.network.ApiClient
+import deploy.com.timelineschedule.network.ApiService
+import deploy.com.timelineschedule.preference.PrefManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+class HomeFragment : Fragment(), TimelineView {
+    private lateinit var  binding: FragmentHomeBinding
+    private lateinit var  presenter: TimelinePresenter
+    private lateinit var timelineAdapter: TimelineAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        presenter = TimelinePresenter(this, PrefManager(requireContext()), ApiClient.getService())
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        timelineAdapter = TimelineAdapter(arrayListOf(), object : TimelineAdapter.OnAdapterListener{
+            override fun onClick(timeline: TimelineItem) {
+                val intent = Intent(requireActivity(), DetailActivity::class.java)
+//                intent.putExtra(timeline)
+                startActivity(intent)
             }
+
+        })
+        binding.rvTimeline.adapter = timelineAdapter
+        with(binding) {
+            presenter.fetchTimelineByIdStatus("HOLD")
+            btnFinish.setOnClickListener {
+                btnFinish.setBackgroundResource(R.drawable.shape_ractengle_button)
+                btnFinish.setTextColor(Color.WHITE)
+                btnProcess.setBackgroundResource(R.drawable.shape_ractangle_button_un)
+                btnProcess.setTextColor(Color.BLACK)
+                presenter.fetchTimelineByIdStatus("FINISHED")
+            }
+            btnProcess.setOnClickListener {
+                btnFinish.setBackgroundResource(R.drawable.shape_ractangle_button_un)
+                btnFinish.setTextColor(Color.BLACK)
+                btnProcess.setBackgroundResource(R.drawable.shape_ractengle_button)
+                btnProcess.setTextColor(Color.WHITE)
+                presenter.fetchTimelineByIdStatus("HOLD")
+            }
+        }
     }
+
+    override fun loading(boolean: Boolean) {
+        if(boolean) binding.progressBar.visibility = View.GONE else  binding.progressBar.visibility  = View.GONE
+    }
+
+    override fun timelineResponse(response: TimelineResponse) {
+        if (response.status) {
+            timelineAdapter.addList(response.timeline)
+            binding.imgNoData.visibility = View.GONE
+            binding.txtNodata.visibility = View.GONE
+        } else {
+            binding.rvTimeline.visibility = View.GONE
+            binding.imgNoData.visibility = View.VISIBLE
+            binding.txtNodata.visibility = View.VISIBLE
+        }
+
+
+    }
+
+    override fun error(msg: String) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    }
+
+
+    override fun logout() {
+        Toast.makeText(requireActivity(), "Berhasil Keluar" , Toast.LENGTH_SHORT).show()
+    }
+
 }

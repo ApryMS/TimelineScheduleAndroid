@@ -1,17 +1,16 @@
 package deploy.com.timelineschedule.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.os.Looper
 import android.widget.Toast
+import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.databinding.ActivityLoginBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.home.HomeActivity
-import org.json.JSONObject
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : BaseActivity(), LoginView {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private lateinit var presenter: LoginPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,16 +33,22 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun loginLoading(boolean: Boolean) {
-        if(boolean) binding.progresbarrSignin.visibility = View.VISIBLE else binding.progresbarrSignin.visibility =View.GONE
+        binding.btnSignin.isEnabled = boolean.not()
+        when(boolean) {
+            true -> binding.btnSignin.text = "Tunggu..."
+            false -> binding.btnSignin.text = "Masuk"
+        }
+//        if(boolean) binding.progresbarrSignin.visibility = View.VISIBLE else binding.progresbarrSignin.visibility =View.GONE
     }
 
     override fun loginResponse(response: ResponseLogin) {
         presenter.saveLogin(response.data.user, response.data.token)
-        startActivity(Intent(this,HomeActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
 
-    override fun loginError(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    override fun loginError(msg: String) {
+            Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+
     }
 }

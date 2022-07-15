@@ -20,14 +20,22 @@ class LoginPresenter (
         view.loginLoading(true)
         GlobalScope.launch {
             val response = api.login(req)
-            if (response.isSuccessful){
-                withContext(Dispatchers.Main){
-                    view.loginResponse(response.body()!!)
-                    view.loginLoading(false)
+                if (response.isSuccessful){
+                    if (response.body()!!.status){
+                        withContext(Dispatchers.Main){
+                            view.loginResponse(response.body()!!)
+                            view.loginLoading(false)
+                        }
+                    }else{
+                        withContext(Dispatchers.Main){
+                            view.loginError(response.body()!!.message)
+                            view.loginLoading(false)
+                        }
+
+                    }
+                } else {
+                    view.loginError("Terjadi Kesalahan")
                 }
-            } else {
-                view.loginError("Terjadi Kesalahan")
-            }
         }
     }
 
@@ -36,10 +44,12 @@ class LoginPresenter (
         pref.put("token", token)
         pref.put("user_login", Gson().toJson(data))
     }
+
+
 }
 interface LoginView{
     fun setupListener()
     fun loginLoading(boolean: Boolean)
     fun loginResponse(response: ResponseLogin)
-    fun loginError(message: String)
+    fun loginError(msg: String)
 }

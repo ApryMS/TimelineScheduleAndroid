@@ -50,7 +50,7 @@ dependencies {
     def interceptor_version = "4.7.2"
     implementation "com.squareup.okhttp3:logging-interceptor:$interceptor_version"
 
-    def coroutines_version = "1.5.1"
+    def coroutines_version = "1.4.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 

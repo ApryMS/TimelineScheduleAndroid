@@ -28,6 +28,7 @@
         android:fontFamily="@font/montserrat_subrayada"
         android:text="@string/tagline"
         android:textColor="@color/white"
+        android:gravity="center"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
