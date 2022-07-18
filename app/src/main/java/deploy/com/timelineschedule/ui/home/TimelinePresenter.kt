@@ -22,11 +22,6 @@ class TimelinePresenter (
 //        Log.e("Profile", pref.getString("user_login")!!)
     }
 
-    fun date() {
-        val format: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val date: Date = format.parse("2015-06-25T00:00:00.000Z")
-    }
-
     fun fetchTimelineByIdStatus(status: String) {
         val json = pref.getString("user_login")
         val user =  Gson().fromJson(json, User::class.java)

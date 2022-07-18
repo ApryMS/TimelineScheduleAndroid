@@ -1,6 +1,7 @@
 package deploy.com.timelineschedule.network
 
 import deploy.com.timelineschedule.ui.home.TimelineResponse
+import deploy.com.timelineschedule.ui.home.detailtimeline.TimelineDetailResponse
 import deploy.com.timelineschedule.ui.login.LoginRequest
 import deploy.com.timelineschedule.ui.login.ResponseLogin
 import retrofit2.Response
@@ -19,4 +20,10 @@ interface ApiService {
         @Query("status") status : String,
         @Header("Authorization") token : String
     ) : Response<TimelineResponse>
+
+    @GET("timeline/detail-timeline")
+    suspend fun getDetailTimeline(
+        @Query("id") id : String,
+        @Header("Authorization") token : String
+    ) : Response<TimelineDetailResponse>
 }

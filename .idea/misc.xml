@@ -8,12 +8,14 @@
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractangle_button_un.xml" value="0.1485" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractengle_button.xml" value="0.1485" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractengle_button_unchoose.xml" value="0.1485" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_splash_screen.xml" value="0.17074275362318841" />
-        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_profile.xml" value="0.17074275362318841" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_task.xml" value="0.17074275362318841" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_task.xml" value="0.258252427184466" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_timeline.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/menu/home_menu.xml" value="0.1921875" />
       </map>

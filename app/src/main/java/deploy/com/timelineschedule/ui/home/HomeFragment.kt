@@ -2,19 +2,17 @@ package deploy.com.timelineschedule.ui.home
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.ViewCompat
 import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.FragmentHomeBinding
 import deploy.com.timelineschedule.network.ApiClient
-import deploy.com.timelineschedule.network.ApiService
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.home.detailtimeline.DetailActivity
 
 class HomeFragment : Fragment(), TimelineView {
     private lateinit var  binding: FragmentHomeBinding
@@ -35,7 +33,7 @@ class HomeFragment : Fragment(), TimelineView {
         timelineAdapter = TimelineAdapter(arrayListOf(), object : TimelineAdapter.OnAdapterListener{
             override fun onClick(timeline: TimelineItem) {
                 val intent = Intent(requireActivity(), DetailActivity::class.java)
-//                intent.putExtra(timeline)
+                intent.putExtra("idTimeline", timeline.id)
                 startActivity(intent)
             }
 

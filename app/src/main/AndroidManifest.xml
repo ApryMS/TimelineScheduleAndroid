@@ -15,8 +15,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
+            android:name=".ui.home.detailtimeline.DetailActivity"
+            android:exported="false"
+            android:label="Detail Timeline"
+            android:theme="@style/Theme.Detail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.HomeActivity" />
+        </activity>
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false" />

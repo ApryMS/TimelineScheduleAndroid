@@ -12,4 +12,7 @@
     <string name="prosess">Di Proses</string>
     <string name="selesai">Selesai</string>
     <string name="no_data">No Data</string>
+    <string name="tanggal_dibuat">Tanggal Dibuat</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="status">Status</string>
 </resources>

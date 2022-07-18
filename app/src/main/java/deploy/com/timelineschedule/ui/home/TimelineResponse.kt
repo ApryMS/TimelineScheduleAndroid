@@ -1,6 +1,7 @@
 package deploy.com.timelineschedule.ui.home
 
 import com.google.gson.annotations.SerializedName
+import deploy.com.timelineschedule.ui.DataUser
 
 data class TimelineResponse(
 
@@ -28,10 +29,10 @@ data class TimelineItem(
 	val id: String,
 
 	@field:SerializedName("invite")
-	val invite: Invite,
+	val invite: DataUser,
 
 	@field:SerializedName("makeBy")
-	val makeBy: MakeBy,
+	val makeBy: DataUser,
 
 	@field:SerializedName("status")
 	val status: String,
@@ -40,22 +41,6 @@ data class TimelineItem(
 	val updatedAt: String
 )
 
-data class MakeBy(
 
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("_id")
-	val id: String
-)
-
-data class Invite(
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("_id")
-	val id: String
-)
 
 
