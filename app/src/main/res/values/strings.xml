@@ -15,4 +15,6 @@
     <string name="tanggal_dibuat">Tanggal Dibuat</string>
     <string name="deskripsi">Deskripsi</string>
     <string name="status">Status</string>
+    <string name="judul">Judul</string>
+    <string name="invite">Invite</string>
 </resources>

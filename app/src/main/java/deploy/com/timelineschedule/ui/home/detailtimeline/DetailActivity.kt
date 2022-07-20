@@ -1,16 +1,15 @@
 package deploy.com.timelineschedule.ui.home.detailtimeline
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.google.gson.Gson
 import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.databinding.ActivityDetailBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
-import deploy.com.timelineschedule.ui.home.TimelineAdapter
-import deploy.com.timelineschedule.ui.home.TimelineItem
+import deploy.com.timelineschedule.ui.login.User
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,11 +31,10 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
 
         })
         binding.rvListTask.adapter = adapterTask
-    }
-
-    override fun setupListener() {
 
     }
+
+
 
     override fun loading(boolean: Boolean) {
         if (boolean) {
@@ -55,6 +53,11 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
     }
 
     override fun timelineDetailResponse(response: TimelineDetailResponse) {
+        val json = PrefManager(this).getString("user_login")
+        val user =  Gson().fromJson(json, User::class.java)
+        if (user.id !== response.timeline.invite.id) {
+            binding.button.visibility = View.GONE
+        }
         adapterTask.addList(response.task)
         val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.US)

@@ -1,6 +1,8 @@
 package deploy.com.timelineschedule.network
 
+import deploy.com.timelineschedule.ui.DataUser
 import deploy.com.timelineschedule.ui.home.TimelineResponse
+import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 import deploy.com.timelineschedule.ui.home.detailtimeline.TimelineDetailResponse
 import deploy.com.timelineschedule.ui.login.LoginRequest
 import deploy.com.timelineschedule.ui.login.ResponseLogin
@@ -26,4 +28,12 @@ interface ApiService {
         @Query("id") id : String,
         @Header("Authorization") token : String
     ) : Response<TimelineDetailResponse>
+
+    @GET("employee/all")
+    suspend fun getEmployee() : Response<InviteResponse>
+
+    @GET("employee/by-name")
+    suspend fun getEmployeeByName(
+        @Query("name") name: String
+    ) : Response<DataUser>
 }

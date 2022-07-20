@@ -12,6 +12,7 @@ import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.FragmentHomeBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.home.addtimeline.AddActivity
 import deploy.com.timelineschedule.ui.home.detailtimeline.DetailActivity
 
 class HomeFragment : Fragment(), TimelineView {
@@ -54,6 +55,10 @@ class HomeFragment : Fragment(), TimelineView {
                 btnProcess.setBackgroundResource(R.drawable.shape_ractengle_button)
                 btnProcess.setTextColor(Color.WHITE)
                 presenter.fetchTimelineByIdStatus("HOLD")
+            }
+
+            fabAdd.setOnClickListener {
+                startActivity(Intent(requireActivity(), AddActivity::class.java))
             }
         }
     }

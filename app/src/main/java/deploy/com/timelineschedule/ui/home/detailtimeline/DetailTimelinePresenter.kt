@@ -13,9 +13,6 @@ class DetailTimelinePresenter (
     private val api: ApiService,
     private val pref: PrefManager
 ) {
-    init {
-        view.setupListener()
-    }
 
     fun fetchDetailTimeline(id: String) {
         view.loading(true)
@@ -39,7 +36,6 @@ class DetailTimelinePresenter (
 }
 
 interface DetailViewTImeline {
-    fun setupListener()
     fun loading(boolean: Boolean)
     fun timelineDetailResponse(response: TimelineDetailResponse)
     fun error(msg :String)
