@@ -2,6 +2,7 @@ package deploy.com.timelineschedule.ui.home.detailtimeline
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.gson.Gson
@@ -55,7 +56,10 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
     override fun timelineDetailResponse(response: TimelineDetailResponse) {
         val json = PrefManager(this).getString("user_login")
         val user =  Gson().fromJson(json, User::class.java)
-        if (user.id !== response.timeline.invite.id) {
+        if (user.id == response.timeline.invite.id) {
+            binding.button.visibility = View.VISIBLE
+
+        } else{
             binding.button.visibility = View.GONE
         }
         adapterTask.addList(response.task)

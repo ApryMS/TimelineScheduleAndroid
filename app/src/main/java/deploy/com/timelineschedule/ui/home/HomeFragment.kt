@@ -68,11 +68,12 @@ class HomeFragment : Fragment(), TimelineView {
     }
 
     override fun timelineResponse(response: TimelineResponse) {
-        if (response.status) {
+        if (response.timeline.isNotEmpty()) {
             timelineAdapter.addList(response.timeline)
             binding.imgNoData.visibility = View.GONE
             binding.txtNodata.visibility = View.GONE
         } else {
+
             binding.rvTimeline.visibility = View.GONE
             binding.imgNoData.visibility = View.VISIBLE
             binding.txtNodata.visibility = View.VISIBLE

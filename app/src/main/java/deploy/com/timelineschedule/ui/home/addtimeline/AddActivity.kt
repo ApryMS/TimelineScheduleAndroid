@@ -1,6 +1,7 @@
 package deploy.com.timelineschedule.ui.home.addtimeline
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -8,7 +9,9 @@ import android.widget.Toast
 import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.databinding.ActivityAddBinding
 import deploy.com.timelineschedule.network.ApiClient
+import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.DataUser
+import deploy.com.timelineschedule.ui.home.HomeActivity
 
 
 class AddActivity : BaseActivity(), AddTimelineView {
@@ -19,7 +22,7 @@ class AddActivity : BaseActivity(), AddTimelineView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        presenter = AddTimelinePresenter(this, ApiClient.getService())
+        presenter = AddTimelinePresenter(this, ApiClient.getService(), PrefManager(this))
         presenter.fetchEmployee()
         codes = ArrayList()
 
@@ -27,8 +30,12 @@ class AddActivity : BaseActivity(), AddTimelineView {
 
     }
 
-    override fun setupListener() {
 
+
+    override fun setupListener() {
+        binding.btnSubmit.setOnClickListener {
+            addTimeline()
+        }
     }
 
     override fun loading(loading: Boolean) {
@@ -38,6 +45,8 @@ class AddActivity : BaseActivity(), AddTimelineView {
     override fun errorAdd(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
+
+
 
     override fun responseInvite(responseInvite: InviteResponse) {
         val dataEmployee = responseInvite.data
@@ -55,6 +64,19 @@ class AddActivity : BaseActivity(), AddTimelineView {
 
     override fun responseId(resId: DataUser) {
         idEmployee = resId.id
+    }
+    private fun addTimeline() {
+        with(binding){
+            if (etJudul.text !== null && etDeskripsi.text !== null && idEmployee !== null){
+                presenter.postTimeline(etJudul.text.toString(), etDeskripsi.text.toString(), idEmployee.toString())
+            }
+        }
+    }
+
+    override fun responseAdd(responseAdd: AddTimelineResponse) {
+        Toast.makeText(applicationContext, responseAdd.message, Toast.LENGTH_SHORT).show()
+        startActivity(Intent(applicationContext, HomeActivity::class.java))
+        finish()
     }
 
 

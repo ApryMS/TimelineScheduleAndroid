@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AddTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.addtimeline.AddActivity"
             android:exported="false"
             android:label="Buat Timeline"

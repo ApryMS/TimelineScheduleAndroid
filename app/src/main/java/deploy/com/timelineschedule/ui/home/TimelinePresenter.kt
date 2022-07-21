@@ -50,6 +50,36 @@ class TimelinePresenter (
 
     }
 
+    fun fetchTimelineByInviteStatus(status: String) {
+        val json = pref.getString("user_login")
+        val user =  Gson().fromJson(json, User::class.java)
+        view.loading(true)
+        GlobalScope.launch {
+            val response = api.getTimelineWithStatus(user.id, status, "Bearer "+pref.getToken("token"))
+            if (response.code() == 401){
+                withContext(Dispatchers.Main) {
+                    response.body()?.let { view.timelineResponse(it) }
+                    view.loading(false)
+                }
+            }
+            if (response.isSuccessful) {
+                withContext(Dispatchers.Main) {
+                    response.body()?.let { view.timelineResponse(it) }
+                    view.loading(false)
+                }
+            }else {
+                withContext(Dispatchers.Main) {
+                    view.error("Tidak Ada Data")
+                    view.loading(false)
+                }
+
+            }
+        }
+
+    }
+
+
+
     fun logout(){
         pref.clearData()
         view.logout()
