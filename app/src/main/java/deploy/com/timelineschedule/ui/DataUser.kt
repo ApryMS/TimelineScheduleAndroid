@@ -2,7 +2,7 @@ package deploy.com.timelineschedule.ui
 
 import com.google.gson.annotations.SerializedName
 
-data class DataUser (
+data class  DataUser (
     @field:SerializedName("name")
     val name: String,
 
