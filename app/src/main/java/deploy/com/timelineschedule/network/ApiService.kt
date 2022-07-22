@@ -2,6 +2,7 @@ package deploy.com.timelineschedule.network
 
 import deploy.com.timelineschedule.ui.DataUser
 import deploy.com.timelineschedule.ui.home.TimelineResponse
+import deploy.com.timelineschedule.ui.home.addTask.AddTaskResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.AddTimelineResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 import deploy.com.timelineschedule.ui.home.detailtimeline.TimelineDetailResponse
@@ -38,8 +39,13 @@ interface ApiService {
         @Header("Authorization") token : String
     ) : Response<TimelineDetailResponse>
 
-    @GET("employee/all")
-    suspend fun getEmployee() : Response<InviteResponse>
+    @FormUrlEncoded
+    @POST("employee/all")
+    suspend fun getEmployee(@Field("idUser") idUser: String) : Response<InviteResponse>
+
+    @FormUrlEncoded
+    @POST("employee/all-worker")
+    suspend fun getEmployeeWorker(@Field("idUserInvite") idUserInvite: String) : Response<InviteResponse>
 
     @GET("employee/by-name")
     suspend fun getEmployeeByName(
@@ -55,6 +61,16 @@ interface ApiService {
         @Field("invite") invite: String,
         @Header("Authorization") token : String
     ) : Response<AddTimelineResponse>
+
+    @FormUrlEncoded
+    @POST("task/add-task")
+    suspend fun postTask(
+        @Field("name") name : String,
+        @Field("timeline") timeline : String,
+        @Field("worker") worker : String,
+        @Field("inviteBy") inviteBy : String,
+        @Header("Authorization") token: String
+    ) : Response<AddTaskResponse>
 
     @GET("task/show-task-status")
     suspend fun getTaskByUserAndStatus(

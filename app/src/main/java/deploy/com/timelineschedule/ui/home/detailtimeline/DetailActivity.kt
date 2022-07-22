@@ -1,6 +1,7 @@
 package deploy.com.timelineschedule.ui.home.detailtimeline
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.databinding.ActivityDetailBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.home.addTask.AddTaskActivity
 import deploy.com.timelineschedule.ui.login.User
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -33,6 +35,7 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
         })
         binding.rvListTask.adapter = adapterTask
 
+
     }
 
 
@@ -54,6 +57,12 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
     }
 
     override fun timelineDetailResponse(response: TimelineDetailResponse) {
+        binding.button.setOnClickListener {
+            val intent = Intent(this@DetailActivity, AddTaskActivity::class.java)
+            intent.putExtra("idTimeline", response.timeline.id)
+            startActivity(intent)
+
+        }
         val json = PrefManager(this).getString("user_login")
         val user =  Gson().fromJson(json, User::class.java)
         if (user.id == response.timeline.invite.id) {

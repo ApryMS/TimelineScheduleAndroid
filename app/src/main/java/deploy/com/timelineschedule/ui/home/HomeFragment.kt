@@ -70,10 +70,10 @@ class HomeFragment : Fragment(), TimelineView {
     override fun timelineResponse(response: TimelineResponse) {
         if (response.timeline.isNotEmpty()) {
             timelineAdapter.addList(response.timeline)
+            binding.rvTimeline.visibility = View.VISIBLE
             binding.imgNoData.visibility = View.GONE
             binding.txtNodata.visibility = View.GONE
         } else {
-
             binding.rvTimeline.visibility = View.GONE
             binding.imgNoData.visibility = View.VISIBLE
             binding.txtNodata.visibility = View.VISIBLE
@@ -83,6 +83,9 @@ class HomeFragment : Fragment(), TimelineView {
     }
 
     override fun error(msg: String) {
+        binding.rvTimeline.visibility = View.GONE
+        binding.imgNoData.visibility = View.VISIBLE
+        binding.txtNodata.visibility = View.VISIBLE
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 

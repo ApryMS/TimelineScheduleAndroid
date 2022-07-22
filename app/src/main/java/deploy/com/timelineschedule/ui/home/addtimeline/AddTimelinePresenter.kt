@@ -21,8 +21,10 @@ class AddTimelinePresenter (
     }
 
     fun fetchEmployee(){
+        val json = prefManager.getString("user_login")
+        val user =  Gson().fromJson(json, User::class.java)
         GlobalScope.launch {
-            val res = api.getEmployee()
+            val res = api.getEmployee(user.id)
             if (res.isSuccessful){
                 withContext(Dispatchers.Main){
                     res.body()?.let { view.responseInvite(it) }
