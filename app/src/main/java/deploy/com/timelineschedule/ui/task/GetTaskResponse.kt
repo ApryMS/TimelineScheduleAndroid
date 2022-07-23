@@ -11,15 +11,6 @@ data class GetTaskResponse(
 	val status: Boolean
 )
 
-data class InviteBy(
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("_id")
-	val id: String
-)
-
 data class Timeline(
 
 	@field:SerializedName("createdAt")
@@ -50,6 +41,33 @@ data class Timeline(
 	val updatedAt: String
 )
 
+data class MakeBy(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("_id")
+	val id: String
+)
+
+data class InviteBy(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("_id")
+	val id: String
+)
+
+data class Worker(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("_id")
+	val id: String
+)
+
 data class TaskItem(
 
 	@field:SerializedName("createdAt")
@@ -71,20 +89,11 @@ data class TaskItem(
 	val id: String,
 
 	@field:SerializedName("worker")
-	val worker: String,
+	val worker: Worker,
 
 	@field:SerializedName("status")
 	val status: String,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String
-)
-
-data class MakeBy(
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("_id")
-	val id: String
 )
