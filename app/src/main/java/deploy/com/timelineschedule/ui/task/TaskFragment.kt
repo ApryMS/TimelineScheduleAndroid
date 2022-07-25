@@ -33,10 +33,10 @@ class TaskFragment : Fragment(), ViewTask {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         taskAdapter = TaskAdapter(arrayListOf(), object : TaskAdapter.OnAdapterListener{
-            override fun onClick(timeline: TaskItem) {
-//                val intent = Intent(requireActivity(), DetailActivity::class.java)
-//                intent.putExtra("idTimeline", timeline.id)
-//                startActivity(intent)
+            override fun onClick(task: TaskItem) {
+                val intent = Intent(requireActivity(), DetailTaskActivity::class.java)
+                intent.putExtra("idTask", task.id)
+                startActivity(intent)
             }
 
         })

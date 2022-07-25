@@ -27,7 +27,7 @@ class TaskPresent (
                                 }
                         } else {
                                 withContext(Dispatchers.Main) {
-                                        view.error("Terjadi kesalahan")
+                                        view.error("Tidak Ada Data")
                                         view.loading(false)
                                 }
 

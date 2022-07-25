@@ -15,6 +15,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.task.DetailTaskActivity"
+            android:exported="false"
+            android:label="Detail Tugas"
+            android:theme="@style/Theme.Detail"
+            />
+        <activity
             android:name=".ui.home.addTask.AddTaskActivity"
             android:exported="false"
             android:label="Tambah Tugas"

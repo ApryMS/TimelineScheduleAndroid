@@ -8,7 +8,9 @@ import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 import deploy.com.timelineschedule.ui.home.detailtimeline.TimelineDetailResponse
 import deploy.com.timelineschedule.ui.login.LoginRequest
 import deploy.com.timelineschedule.ui.login.ResponseLogin
+import deploy.com.timelineschedule.ui.task.DetailTaskResponse
 import deploy.com.timelineschedule.ui.task.GetTaskResponse
+import deploy.com.timelineschedule.ui.task.UpdateTaskResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -38,6 +40,12 @@ interface ApiService {
         @Query("id") id : String,
         @Header("Authorization") token : String
     ) : Response<TimelineDetailResponse>
+
+    @GET("task/detail-task")
+    suspend fun getDetailTask(
+        @Query("id") id : String,
+        @Header("Authorization") token: String
+    ) : Response<DetailTaskResponse>
 
     @FormUrlEncoded
     @POST("employee/all")
@@ -78,5 +86,13 @@ interface ApiService {
         @Query("status") status : String,
         @Header("Authorization") token: String
     ) : Response<GetTaskResponse>
+
+    @FormUrlEncoded
+    @PUT("task/update-status")
+    suspend fun updateTask(
+        @Field("idTask") idTask: String,
+        @Field("status") status: String,
+        @Header("Authorization") token: String
+    ) : Response<UpdateTaskResponse>
 
 }

@@ -1,8 +1,11 @@
 package deploy.com.timelineschedule.ui.home
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors.getColor
+import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.ListTimelineBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -30,6 +33,16 @@ class TimelineAdapter (
             txtJudul.text = timeline.name
             txtInvite.text = "Invite" + " " + timeline.invite.name
             txtDescription.text = timeline.description
+            tvStatus.text = timeline.status
+
+            if (timeline.status == "HOLD"){
+                tvStatus.setTextColor(Color.parseColor("#FF0000"))
+                view.setBackgroundColor(Color.parseColor("#FF0000"))
+            }
+            if (timeline.status == "FINISHED") {
+                tvStatus.setTextColor(Color.parseColor("#1AAF20"))
+                view.setBackgroundColor(Color.parseColor("#1AAF20"))
+            }
             val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
             val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.US)
             val date = inputFormat.parse(timeline.updatedAt)

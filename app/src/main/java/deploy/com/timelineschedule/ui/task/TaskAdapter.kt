@@ -1,5 +1,6 @@
 package deploy.com.timelineschedule.ui.task
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,15 @@ class TaskAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val task = task[position]
         with(holder.binding){
+            if (task.status == "HOLD"){
+                tvStatus.setTextColor(Color.parseColor("#FF0000"))
+                view.setBackgroundColor(Color.parseColor("#FF0000"))
+            }
+            if (task.status == "FINISHED") {
+                tvStatus.setTextColor(Color.parseColor("#1AAF20"))
+                view.setBackgroundColor(Color.parseColor("#1AAF20"))
+            }
+            tvStatus.text = task.status
             tvJudul.text = task.name
             tvInvite.text = "Invited by" + " " + task.inviteBy.name
             val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
