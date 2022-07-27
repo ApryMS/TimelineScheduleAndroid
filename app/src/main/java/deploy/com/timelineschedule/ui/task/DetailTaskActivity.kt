@@ -1,17 +1,22 @@
 package deploy.com.timelineschedule.ui.task
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import deploy.com.timelineschedule.R
-import deploy.com.timelineschedule.databinding.ActivityAddTaskBinding
 import deploy.com.timelineschedule.databinding.ActivityDetailTaskBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.home.HomeActivity
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class DetailTaskActivity : AppCompatActivity(), ViewDetailTask {
     private val binding by lazy { ActivityDetailTaskBinding.inflate(layoutInflater) }
@@ -62,7 +67,19 @@ class DetailTaskActivity : AppCompatActivity(), ViewDetailTask {
             tvDateTimeline.text = outputFormat.format(dateTimeline)
         }
         binding.button.setOnClickListener {
-            updateStatusTask(task.id)
+            val builder = AlertDialog.Builder(this)
+            val view = layoutInflater.inflate(R.layout.dialog_confirm, null)
+            builder.setView(view)
+            builder.setPositiveButton("Sudah", DialogInterface.OnClickListener { dialog, which ->
+                updateStatusTask(task.id)
+
+
+            })
+            builder.setNegativeButton(
+                "Belum",
+                DialogInterface.OnClickListener { dialog, which -> })
+            builder.show()
+
         }
     }
 
@@ -71,7 +88,10 @@ class DetailTaskActivity : AppCompatActivity(), ViewDetailTask {
     }
 
     override fun responseUpdate(responseUpdate: UpdateTaskResponse) {
-        Toast.makeText(applicationContext, responseUpdate.message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, responseUpdate.message+" "+"Silahkan swap down untuk refresh page", Toast.LENGTH_SHORT).show()
+        finish()
+
     }
+
 
 }

@@ -95,4 +95,11 @@ interface ApiService {
         @Header("Authorization") token: String
     ) : Response<UpdateTaskResponse>
 
+    @FormUrlEncoded
+    @PUT("timeline/edit-status")
+    suspend fun updateTimeline(
+        @Field("idTimeline") idTimeline: String,
+        @Header("Authorization") token: String
+    ) : Response<UpdateTaskResponse>
+
 }

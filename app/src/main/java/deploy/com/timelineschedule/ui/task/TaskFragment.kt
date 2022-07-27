@@ -3,19 +3,17 @@ package deploy.com.timelineschedule.ui.task
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.FragmentTaskBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
-import deploy.com.timelineschedule.ui.home.TimelineAdapter
-import deploy.com.timelineschedule.ui.home.TimelineItem
 import deploy.com.timelineschedule.ui.home.addtimeline.AddActivity
-import deploy.com.timelineschedule.ui.home.detailtimeline.DetailActivity
 
 
 class TaskFragment : Fragment(), ViewTask {
@@ -23,6 +21,7 @@ class TaskFragment : Fragment(), ViewTask {
     private lateinit var presenter: TaskPresent
     private lateinit var taskAdapter: TaskAdapter
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -32,6 +31,7 @@ class TaskFragment : Fragment(), ViewTask {
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         taskAdapter = TaskAdapter(arrayListOf(), object : TaskAdapter.OnAdapterListener{
             override fun onClick(task: TaskItem) {
                 val intent = Intent(requireActivity(), DetailTaskActivity::class.java)
@@ -41,14 +41,23 @@ class TaskFragment : Fragment(), ViewTask {
 
         })
         binding.rvTimeline.adapter = taskAdapter
+
         with(binding) {
+
             presenter.fetchTask("HOLD")
+            binding.swipe.setOnRefreshListener {
+                presenter.fetchTask("HOLD")
+            }
+
             btnFinish.setOnClickListener {
                 btnFinish.setBackgroundResource(R.drawable.shape_ractengle_button)
                 btnFinish.setTextColor(Color.WHITE)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractangle_button_un)
                 btnProcess.setTextColor(Color.BLACK)
                 presenter.fetchTask("FINISHED")
+                binding.swipe.setOnRefreshListener {
+                    presenter.fetchTask("FINISHED")
+                }
             }
             btnProcess.setOnClickListener {
                 btnFinish.setBackgroundResource(R.drawable.shape_ractangle_button_un)
@@ -56,16 +65,17 @@ class TaskFragment : Fragment(), ViewTask {
                 btnProcess.setBackgroundResource(R.drawable.shape_ractengle_button)
                 btnProcess.setTextColor(Color.WHITE)
                 presenter.fetchTask("HOLD")
-            }
+                binding.swipe.setOnRefreshListener {
+                    presenter.fetchTask("HOLD")
+                }
 
-            fabAdd.setOnClickListener {
-                startActivity(Intent(requireActivity(), AddActivity::class.java))
             }
         }
     }
 
 
     override fun loading(loading: Boolean) {
+        binding.swipe.isRefreshing = loading
         if(loading) binding.progressBar.visibility = View.GONE else  binding.progressBar.visibility  = View.GONE
     }
 
