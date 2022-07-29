@@ -18,4 +18,9 @@
     <string name="judul">Judul</string>
     <string name="invite">Invite</string>
     <string name="keluar">Keluar</string>
+
+    <string-array name="position">
+        <item>IT STAFF</item>
+        <item>OTHERS..</item>
+    </string-array>
 </resources>

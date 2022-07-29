@@ -9,6 +9,7 @@ import deploy.com.timelineschedule.databinding.ActivityLoginBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.home.HomeActivity
+import deploy.com.timelineschedule.ui.registrasi.RegistrasiActivity
 
 class LoginActivity : BaseActivity(), LoginView {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
@@ -23,6 +24,9 @@ class LoginActivity : BaseActivity(), LoginView {
 
     override fun setupListener() {
         with(binding){
+            tvRegistrasi.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegistrasiActivity::class.java))
+            }
             btnSignin.setOnClickListener {
                 val user = LoginRequest()
                 user.email = binding.etEmail.text.toString()

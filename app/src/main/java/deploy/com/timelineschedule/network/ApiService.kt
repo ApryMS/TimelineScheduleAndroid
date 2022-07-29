@@ -102,4 +102,13 @@ interface ApiService {
         @Header("Authorization") token: String
     ) : Response<UpdateTaskResponse>
 
+    @FormUrlEncoded
+    @POST("auth/signup")
+    suspend fun register(
+        @Field("name") name :String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("position") position: String
+    ) : Response<ResponseLogin>
+
 }
