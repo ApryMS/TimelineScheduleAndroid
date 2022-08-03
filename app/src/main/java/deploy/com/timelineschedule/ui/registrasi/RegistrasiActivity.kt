@@ -34,10 +34,12 @@ class RegistrasiActivity : AppCompatActivity(), RegisterView {
                 if(etName.text != null && etPass.text != null && etEmail.text != null && valueSue != null) {
                     presenter.postRegister(
                         etName.text.toString(),
-                        etPass.text.toString(),
                         etEmail.text.toString(),
+                        etPass.text.toString(),
                         valueSue,
                     )
+                    startActivity(Intent(applicationContext, HomeActivity::class.java))
+                    finish()
                 } else{
                     Toast.makeText(applicationContext, "Lengkapi data anda", Toast.LENGTH_SHORT).show()
                 }
