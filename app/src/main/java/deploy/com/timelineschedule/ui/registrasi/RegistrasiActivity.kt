@@ -14,7 +14,6 @@ import deploy.com.timelineschedule.ui.home.HomeActivity
 import deploy.com.timelineschedule.ui.login.ResponseLogin
 
 class RegistrasiActivity : AppCompatActivity(), RegisterView {
-    private lateinit var valueSue : String
     private val binding by lazy { ActivityRegistrasiBinding.inflate(layoutInflater) }
     private lateinit var presenter: RegisterPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,23 +22,15 @@ class RegistrasiActivity : AppCompatActivity(), RegisterView {
         presenter = RegisterPresenter(this, PrefManager(this), ApiClient.getService())
         val position = resources.getStringArray(R.array.position)
         val arrayAdapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, position)
-        binding.etPosition.setAdapter(arrayAdapter)
-        valueSue = String()
-        binding.etPosition.setOnItemClickListener { adapterView, view, i, l ->
-            valueSue = adapterView.getItemAtPosition(i).toString()
 
-        }
         binding.btnSignin.setOnClickListener {
             with(binding) {
-                if(etName.text != null && etPass.text != null && etEmail.text != null && valueSue != null) {
+                if(etName.text != null && etPass.text != null && etEmail.text != null ) {
                     presenter.postRegister(
                         etName.text.toString(),
                         etEmail.text.toString(),
                         etPass.text.toString(),
-                        valueSue,
                     )
-                    startActivity(Intent(applicationContext, HomeActivity::class.java))
-                    finish()
                 } else{
                     Toast.makeText(applicationContext, "Lengkapi data anda", Toast.LENGTH_SHORT).show()
                 }
@@ -63,5 +54,6 @@ class RegistrasiActivity : AppCompatActivity(), RegisterView {
         presenter.saveLogin(response.data.user, response.data.token)
         Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
         startActivity(Intent(applicationContext, HomeActivity::class.java))
+        finish()
     }
 }

@@ -107,8 +107,7 @@ interface ApiService {
     suspend fun register(
         @Field("name") name :String,
         @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("position") position: String
+        @Field("password") password: String
     ) : Response<ResponseLogin>
 
 }

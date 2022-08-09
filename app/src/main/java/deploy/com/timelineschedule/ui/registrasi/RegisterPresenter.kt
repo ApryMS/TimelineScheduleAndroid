@@ -19,12 +19,11 @@ class RegisterPresenter (
     fun postRegister(
         name: String,
         email: String,
-        password: String,
-        position: String
+        password: String
     ){
         view.loading(true)
         GlobalScope.launch {
-            val response = api.register(name, email, password, position)
+            val response = api.register(name, email, password)
             if (response.isSuccessful){
                 withContext(Dispatchers.Main){
                     response.body()?.let { view.response(it) }
