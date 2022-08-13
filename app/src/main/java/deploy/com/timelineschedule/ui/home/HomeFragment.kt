@@ -12,6 +12,7 @@ import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.FragmentHomeBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.dashboard.timeline.*
 import deploy.com.timelineschedule.ui.home.addtimeline.AddActivity
 import deploy.com.timelineschedule.ui.home.detailtimeline.DetailActivity
 

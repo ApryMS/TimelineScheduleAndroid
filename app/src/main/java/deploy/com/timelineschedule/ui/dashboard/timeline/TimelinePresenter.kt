@@ -1,4 +1,4 @@
-package deploy.com.timelineschedule.ui.home
+package deploy.com.timelineschedule.ui.dashboard.timeline
 
 import com.google.gson.Gson
 import deploy.com.timelineschedule.network.ApiService
@@ -8,14 +8,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 class TimelinePresenter (
-        private  val view: TimelineView,
-        private  val pref: PrefManager,
-        private val api : ApiService
+    private  val view: TimelineView,
+    private  val pref: PrefManager,
+    private val api : ApiService
     ) {
 
     init {

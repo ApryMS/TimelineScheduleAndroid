@@ -40,7 +40,6 @@ class ProfileFragment : Fragment() {
             tvPosition.text = user.position
             tvStatus.text = user.status
             btnLogout.setOnClickListener {
-
                 pref.clearData()
                 startActivity(Intent(requireActivity(), LoginActivity::class.java))
                 requireActivity().finish()

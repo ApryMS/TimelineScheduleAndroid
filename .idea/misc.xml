@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/ic_decoration_right.xml" value="0.1485" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/ic_exit.xml" value="0.139" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/retangle_category.xml" value="0.1485" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractangle_button_un.xml" value="0.1485" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractengle_button.xml" value="0.1485" />
@@ -11,6 +12,8 @@
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractengle_input.xml" value="0.22" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_add.xml" value="0.16" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_add_task.xml" value="0.15534420289855072" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard.xml" value="0.1644021739130435" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard_itactivity.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail_task.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_home.xml" value="0.25" />
@@ -26,6 +29,7 @@
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_task.xml" value="0.258252427184466" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_timeline.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/menu/home_menu.xml" value="0.1921875" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/menu/home_menu_it.xml" value="0.1921875" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.185" />
       </map>
     </option>

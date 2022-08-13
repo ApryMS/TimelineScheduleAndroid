@@ -1,4 +1,4 @@
-package deploy.com.timelineschedule.ui.home
+package deploy.com.timelineschedule.ui.dashboard.timeline
 
 import com.google.gson.annotations.SerializedName
 import deploy.com.timelineschedule.ui.DataUser

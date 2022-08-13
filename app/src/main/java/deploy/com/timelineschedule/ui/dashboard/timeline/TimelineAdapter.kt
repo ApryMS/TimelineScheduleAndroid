@@ -1,11 +1,9 @@
-package deploy.com.timelineschedule.ui.home
+package deploy.com.timelineschedule.ui.dashboard.timeline
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.color.MaterialColors.getColor
-import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.ListTimelineBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat

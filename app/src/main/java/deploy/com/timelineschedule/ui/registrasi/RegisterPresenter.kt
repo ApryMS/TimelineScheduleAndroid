@@ -16,14 +16,33 @@ class RegisterPresenter (
     private var api: ApiService
     ) {
 
+    fun fecthToko(){
+        view.loading(true)
+        GlobalScope.launch {
+            val response = api.getListToko()
+            if (response.isSuccessful) {
+                withContext(Dispatchers.Main) {
+                    response.body()?.let { view.resToko(it) }
+                    view.loading(false)
+                }
+            } else {
+                withContext(Dispatchers.Main){
+                    view.error("Terjadi kesalahan")
+                    view.loading(false)
+                }
+            }
+        }
+    }
+
     fun postRegister(
         name: String,
         email: String,
-        password: String
+        password: String,
+        nameToko: String,
     ){
         view.loading(true)
         GlobalScope.launch {
-            val response = api.register(name, email, password)
+            val response = api.register(name, email, password, nameToko)
             if (response.isSuccessful){
                 withContext(Dispatchers.Main){
                     response.body()?.let { view.response(it) }
@@ -52,4 +71,5 @@ interface RegisterView{
     fun loading(loading: Boolean)
     fun error(msg: String)
     fun response(response: ResponseLogin)
+    fun resToko(response: TokoResponse)
 }

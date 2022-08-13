@@ -14,6 +14,8 @@ import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.ActivityDetailBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
+import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
 import deploy.com.timelineschedule.ui.home.HomeActivity
 import deploy.com.timelineschedule.ui.home.addTask.AddTaskActivity
 import deploy.com.timelineschedule.ui.login.User
@@ -25,24 +27,14 @@ import java.util.*
 class DetailActivity : BaseActivity() , DetailViewTImeline {
     private val binding by lazy { ActivityDetailBinding.inflate(layoutInflater) }
     private lateinit var presenter: DetailTimelinePresenter
-    private lateinit var adapterTask: TaskFromDetailAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         presenter = DetailTimelinePresenter(this, ApiClient.getService(), PrefManager(this))
         val id = intent.getStringExtra("idTimeline")!!
         presenter.fetchDetailTimeline(id)
-        adapterTask = TaskFromDetailAdapter(arrayListOf(), object : TaskFromDetailAdapter.OnAdapterListener{
-            override fun onClick(task: TaskItem) {
-
-            }
-
-        })
-        binding.rvListTask.adapter = adapterTask
-
 
     }
-
 
 
     override fun loading(boolean: Boolean) {
@@ -62,6 +54,9 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
     }
 
     override fun timelineDetailResponse(response: TimelineDetailResponse) {
+
+        binding.btnFinishedTimeline.visibility = View.VISIBLE
+
         val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.US)
         if (response.timeline.status == "HOLD"){
@@ -101,13 +96,12 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
         val user =  Gson().fromJson(json, User::class.java)
         if (user.id == response.timeline.invite.id) {
             binding.button.visibility = View.VISIBLE
-            binding.btnFinishedTimeline.visibility = View.VISIBLE
+
 
         } else{
             binding.button.visibility = View.GONE
-            binding.btnFinishedTimeline.visibility = View.GONE
+
         }
-        adapterTask.addList(response.task)
 
         val date = inputFormat.parse(response.timeline.createdAt)!!
 
@@ -123,11 +117,18 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
     }
 
     override fun updateTimelineResponse(responseUpdate: UpdateTaskResponse) {
+        val json = PrefManager(this).getString("user_login")
+        val user =  Gson().fromJson(json, User::class.java)
         Toast.makeText(applicationContext, responseUpdate.message, Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, HomeActivity::class.java))
-        finish()
-    }
+        if (user.position == "KARYAWAN") {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+        } else {
+            startActivity(Intent(this, DashboardITActivity::class.java))
+            finish()
+        }
 
+    }
 
     override fun error(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

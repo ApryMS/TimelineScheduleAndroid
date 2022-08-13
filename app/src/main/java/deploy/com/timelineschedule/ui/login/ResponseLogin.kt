@@ -32,6 +32,9 @@ data class User(
 	@field:SerializedName("position")
 	val position: String,
 
+	@field:SerializedName("toko")
+	val name_toko: String,
+
 	@field:SerializedName("email")
 	val email: String,
 

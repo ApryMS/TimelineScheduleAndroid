@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="deploy.com.timelineschedule">
+    package="deploy.com.timelineschedule" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,20 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TimelineSchedule"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".ui.dashboard.DashboardITActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.registrasi.RegistrasiActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.task.DetailTaskActivity"
-            android:exported="false"
-            android:label="Detail Tugas"
-            android:theme="@style/Theme.Detail" />
-        <activity
             android:name=".ui.home.addTask.AddTaskActivity"
             android:exported="false"
             android:label="Tambah Tugas"
-            android:theme="@style/Theme.Detail">
+            android:theme="@style/Theme.Detail" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.home.detailtimeline.DetailActivity" />
@@ -35,7 +38,7 @@
             android:name=".ui.home.addtimeline.AddActivity"
             android:exported="false"
             android:label="Buat Timeline"
-            android:theme="@style/Theme.Detail">
+            android:theme="@style/Theme.Detail" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.home.HomeActivity" />
@@ -44,7 +47,7 @@
             android:name=".ui.home.detailtimeline.DetailActivity"
             android:exported="false"
             android:label="Detail Timeline"
-            android:theme="@style/Theme.Detail">
+            android:theme="@style/Theme.Detail" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.home.HomeActivity" />
@@ -60,7 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,7 +75,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

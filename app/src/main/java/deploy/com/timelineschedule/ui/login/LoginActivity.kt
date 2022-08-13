@@ -4,10 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
 import android.widget.Toast
+import com.google.gson.Gson
 import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.databinding.ActivityLoginBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
+import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
 import deploy.com.timelineschedule.ui.home.HomeActivity
 import deploy.com.timelineschedule.ui.registrasi.RegistrasiActivity
 
@@ -47,8 +50,17 @@ class LoginActivity : BaseActivity(), LoginView {
 
     override fun loginResponse(response: ResponseLogin) {
         presenter.saveLogin(response.data.user, response.data.token)
-        startActivity(Intent(this, HomeActivity::class.java))
-        finish()
+        val pref = PrefManager(baseContext)
+        val json = pref.getString("user_login")
+        val user = Gson().fromJson(json, User::class.java)
+        if (user.position == "KARYAWAN") {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+        } else {
+            startActivity(Intent(this, DashboardITActivity::class.java))
+            finish()
+        }
+
     }
 
     override fun loginError(msg: String) {

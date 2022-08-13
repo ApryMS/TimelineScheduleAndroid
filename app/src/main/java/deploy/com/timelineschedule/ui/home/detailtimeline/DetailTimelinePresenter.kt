@@ -2,7 +2,6 @@ package deploy.com.timelineschedule.ui.home.detailtimeline
 
 import deploy.com.timelineschedule.network.ApiService
 import deploy.com.timelineschedule.preference.PrefManager
-import deploy.com.timelineschedule.ui.home.TimelineResponse
 import deploy.com.timelineschedule.ui.task.UpdateTaskResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
