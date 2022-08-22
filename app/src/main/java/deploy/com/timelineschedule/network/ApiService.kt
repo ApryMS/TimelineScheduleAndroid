@@ -12,6 +12,8 @@ import deploy.com.timelineschedule.ui.registrasi.TokoResponse
 import deploy.com.timelineschedule.ui.task.DetailTaskResponse
 import deploy.com.timelineschedule.ui.task.GetTaskResponse
 import deploy.com.timelineschedule.ui.task.UpdateTaskResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -77,14 +79,16 @@ interface ApiService {
         @Query("name") name: String
     ) : Response<DataUser>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("timeline/add-timeline")
     suspend fun postTimeline(
-        @Field("name") name: String,
-        @Field("makeBy") makeBy: String,
-        @Field("description") description: String,
-        @Field("invite") invite: String,
-        @Header("Authorization") token : String
+        @Header("Authorization") token: String,
+        @Part file : MultipartBody.Part,
+        @Part("name") name: RequestBody,
+        @Part("makeBy") makeBy: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("invite") invite: RequestBody,
+
     ) : Response<AddTimelineResponse>
 
     @FormUrlEncoded

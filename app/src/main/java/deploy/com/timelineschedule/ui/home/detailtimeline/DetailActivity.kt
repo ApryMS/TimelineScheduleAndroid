@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.R
@@ -34,6 +35,7 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
         val id = intent.getStringExtra("idTimeline")!!
         presenter.fetchDetailTimeline(id)
 
+
     }
 
 
@@ -54,11 +56,18 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
     }
 
     override fun timelineDetailResponse(response: TimelineDetailResponse) {
-
         binding.btnFinishedTimeline.visibility = View.VISIBLE
-
+        val json = PrefManager(this).getString("user_login")
+        val user =  Gson().fromJson(json, User::class.java)
         val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.US)
+        val url = "http://192.168.101.18:3000/"
+        val image = response.timeline.image.replace("""\""", "/")
+        val urlImage = url+image
+        Glide.with(applicationContext)
+            .load(urlImage)
+            .placeholder(R.drawable.ic_broken_image_48)
+            .into(binding.imageViewTL)
         if (response.timeline.status == "HOLD"){
             binding.btnFinishedTimeline.isEnabled = true
             binding.textView10.visibility = View.GONE
@@ -80,27 +89,54 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
         binding.btnFinishedTimeline.setOnClickListener {
 
             val builder = AlertDialog.Builder(this)
-            val view = layoutInflater.inflate(R.layout.dialog_confirm, null)
-            builder.setView(view)
-            builder.setPositiveButton("Sudah", DialogInterface.OnClickListener { dialog, which ->
-                presenter.updateTimeline(response.timeline.id)
+            if (response.timeline.invite.id == user.id){
+                val view = layoutInflater.inflate(R.layout.dialog_confirm, null)
+                builder.setView(view)
+
+                builder.setPositiveButton("Sudah", DialogInterface.OnClickListener { dialog, which ->
+                    presenter.updateTimeline(response.timeline.id)
 
 
-            })
-            builder.setNegativeButton(
-                "Belum",
-                DialogInterface.OnClickListener { dialog, which -> })
-            builder.show()
+                })
+                builder.setNegativeButton(
+                    "Belum",
+                    DialogInterface.OnClickListener { dialog, which -> })
+                builder.show()
+            } else {
+
+                val view = layoutInflater.inflate(R.layout.dialog_confirm_timeline, null)
+                builder.setView(view)
+                builder.setPositiveButton("Sudah", DialogInterface.OnClickListener { dialog, which ->
+                    presenter.updateTimeline(response.timeline.id)
+
+
+                })
+                builder.setNegativeButton(
+                    "Belum",
+                    DialogInterface.OnClickListener { dialog, which -> })
+                builder.show()
+            }
+
         }
-        val json = PrefManager(this).getString("user_login")
-        val user =  Gson().fromJson(json, User::class.java)
+
         if (user.id == response.timeline.invite.id) {
             binding.button.visibility = View.VISIBLE
+            binding.btnFinishedTimeline.setText("Tugas Selesai")
 
 
         } else{
             binding.button.visibility = View.GONE
+            binding.warning.visibility = View.GONE
+            if (response.timeline.makeBy.id == user.id && response.timeline.statusTask == "HOLD") {
+                binding.btnFinishedTimeline.isEnabled = false
+            }
 
+        }
+        binding.imageViewTL.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val view = layoutInflater.inflate(R.layout.image_popup, null)
+            builder.setView(view)
+            builder.show()
         }
 
         val date = inputFormat.parse(response.timeline.createdAt)!!
