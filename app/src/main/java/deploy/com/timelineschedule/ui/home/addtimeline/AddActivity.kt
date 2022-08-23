@@ -17,7 +17,7 @@ import deploy.com.timelineschedule.databinding.ActivityAddBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.DataUser
-import deploy.com.timelineschedule.ui.home.HomeActivity
+import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -122,7 +122,7 @@ class AddActivity : BaseActivity(), AddTimelineView {
 
     override fun responseAdd(responseAdd: AddTimelineResponse) {
         Toast.makeText(applicationContext, responseAdd.message, Toast.LENGTH_SHORT).show()
-        startActivity(Intent(applicationContext, HomeActivity::class.java))
+        startActivity(Intent(applicationContext, DashboardActivity::class.java))
         finish()
     }
 }

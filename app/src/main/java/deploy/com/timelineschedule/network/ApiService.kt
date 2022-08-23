@@ -2,16 +2,14 @@ package deploy.com.timelineschedule.network
 
 import deploy.com.timelineschedule.ui.DataUser
 import deploy.com.timelineschedule.ui.dashboard.timeline.TimelineResponse
-import deploy.com.timelineschedule.ui.home.addTask.AddTaskResponse
+import deploy.com.timelineschedule.ui.dashboard.timeline.UpdateTimelineResponse
+import deploy.com.timelineschedule.ui.home.changeinvitation.AddTaskResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.AddTimelineResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 import deploy.com.timelineschedule.ui.home.detailtimeline.TimelineDetailResponse
 import deploy.com.timelineschedule.ui.login.LoginRequest
 import deploy.com.timelineschedule.ui.login.ResponseLogin
 import deploy.com.timelineschedule.ui.registrasi.TokoResponse
-import deploy.com.timelineschedule.ui.task.DetailTaskResponse
-import deploy.com.timelineschedule.ui.task.GetTaskResponse
-import deploy.com.timelineschedule.ui.task.UpdateTaskResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -30,27 +28,6 @@ interface ApiService {
         @Query("status") status : String,
         @Header("Authorization") token : String
     ) : Response<TimelineResponse>
-
-    @GET("task/detail-task")
-    suspend fun getDetailTask(
-        @Query("id") id : String,
-        @Header("Authorization") token: String
-    ) : Response<DetailTaskResponse>
-
-    @FormUrlEncoded
-    @PUT("task/update-status")
-    suspend fun updateTask(
-        @Field("idTask") idTask: String,
-        @Field("status") status: String,
-        @Header("Authorization") token: String
-    ) : Response<UpdateTaskResponse>
-
-    @GET("task/show-task-status")
-    suspend fun getTaskByUserAndStatus(
-        @Query("userId") userId : String,
-        @Query("status") status : String,
-        @Header("Authorization") token: String
-    ) : Response<GetTaskResponse>
 
     @GET("timeline/timeline-invite-status")
     suspend fun getTimelineInviteWithStatus(
@@ -91,26 +68,32 @@ interface ApiService {
 
     ) : Response<AddTimelineResponse>
 
-    @FormUrlEncoded
-    @POST("task/add-task")
-    suspend fun postTask(
-        @Field("name") name : String,
-        @Field("timeline") timeline : String,
-        @Field("worker") worker : String,
-        @Field("inviteBy") inviteBy : String,
-        @Header("Authorization") token: String
-    ) : Response<AddTaskResponse>
 
     @GET("timeline/list-toko")
     suspend fun  getListToko() : Response<TokoResponse>
 
 
     @FormUrlEncoded
+    @PUT("timeline/edit-status-task")
+    suspend fun updateStatusTaskTimeline(
+        @Field("idTimeline") idTimeline: String,
+        @Header("Authorization") token: String
+    ) : Response<UpdateTimelineResponse>
+
+    @FormUrlEncoded
     @PUT("timeline/edit-status")
     suspend fun updateTimeline(
-        @Field("    idTimeline") idTimeline: String,
+        @Field("idTimeline") idTimeline: String,
         @Header("Authorization") token: String
-    ) : Response<UpdateTaskResponse>
+    ) : Response<UpdateTimelineResponse>
+
+    @FormUrlEncoded
+    @PUT("timeline/edit-invitation")
+    suspend fun changeInvite(
+        @Field("idTimeline") idTimeline: String,
+        @Field("idInvite") idInvite: String,
+        @Header("Authorization") token: String
+    ) : Response<UpdateTimelineResponse>
 
     @FormUrlEncoded
     @POST("auth/signup")

@@ -11,16 +11,17 @@
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractengle_button_unchoose.xml" value="0.1485" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/drawable/shape_ractengle_input.xml" value="0.22" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_add.xml" value="0.22" />
-        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_add_task.xml" value="0.15534420289855072" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_add_task.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard.xml" value="0.1644021739130435" />
-        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard_itactivity.xml" value="0.33" />
-        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail.xml" value="0.25" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard_itactivity.xml" value="0.2" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail_task.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_registrasi.xml" value="0.22" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_splash_screen.xml" value="0.17074275362318841" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/dialog_confirm.xml" value="0.33" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/dialog_confirm_change_invitation.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/dialog_confirm_timeline.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_profile.xml" value="0.33" />

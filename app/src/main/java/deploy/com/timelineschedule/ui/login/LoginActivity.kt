@@ -2,7 +2,6 @@ package deploy.com.timelineschedule.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Looper
 import android.widget.Toast
 import com.google.gson.Gson
 import deploy.com.timelineschedule.BaseActivity
@@ -11,7 +10,6 @@ import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
 import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
-import deploy.com.timelineschedule.ui.home.HomeActivity
 import deploy.com.timelineschedule.ui.registrasi.RegistrasiActivity
 
 class LoginActivity : BaseActivity(), LoginView {

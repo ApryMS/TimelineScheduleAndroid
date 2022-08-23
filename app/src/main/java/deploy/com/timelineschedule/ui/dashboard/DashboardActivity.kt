@@ -28,8 +28,6 @@ class DashboardActivity : AppCompatActivity(), TimelineView {
         val pref = PrefManager(this)
         val json = pref.getString("user_login")
         val user = Gson().fromJson(json, User::class.java)
-
-
         binding.tvName.text = user.name
         binding.tvToko.text = user.name_toko
 
@@ -49,8 +47,14 @@ class DashboardActivity : AppCompatActivity(), TimelineView {
         })
         binding.rvTimeline.adapter = timelineAdapter
         with(binding) {
+            swipe.setOnRefreshListener {
+                presenter.fetchTimelineByIdStatus("HOLD")
+            }
             presenter.fetchTimelineByIdStatus("HOLD")
             btnFinish.setOnClickListener {
+                swipe.setOnRefreshListener {
+                    presenter.fetchTimelineByIdStatus("FINISHED")
+                }
                 btnFinish.setBackgroundResource(R.drawable.shape_ractengle_button)
                 btnFinish.setTextColor(Color.WHITE)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractangle_button_un)
@@ -58,6 +62,9 @@ class DashboardActivity : AppCompatActivity(), TimelineView {
                 presenter.fetchTimelineByIdStatus("FINISHED")
             }
             btnProcess.setOnClickListener {
+                swipe.setOnRefreshListener {
+                    presenter.fetchTimelineByIdStatus("HOLD")
+                }
                 btnFinish.setBackgroundResource(R.drawable.shape_ractangle_button_un)
                 btnFinish.setTextColor(Color.BLACK)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractengle_button)
@@ -74,7 +81,14 @@ class DashboardActivity : AppCompatActivity(), TimelineView {
     }
 
     override fun loading(boolean: Boolean) {
-        if(boolean) binding.progressBar.visibility = View.GONE else  binding.progressBar.visibility  = View.GONE
+        binding.swipe.isRefreshing = boolean
+        if(boolean) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.imgNoData.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+
+        }
     }
 
     override fun timelineResponse(response: TimelineResponse) {

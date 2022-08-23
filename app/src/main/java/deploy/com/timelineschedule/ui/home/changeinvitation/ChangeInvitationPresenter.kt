@@ -1,9 +1,10 @@
-package deploy.com.timelineschedule.ui.home.addTask
+package deploy.com.timelineschedule.ui.home.changeinvitation
 
 import com.google.gson.Gson
 import deploy.com.timelineschedule.network.ApiService
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.DataUser
+import deploy.com.timelineschedule.ui.dashboard.timeline.UpdateTimelineResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 import deploy.com.timelineschedule.ui.login.User
 import kotlinx.coroutines.Dispatchers
@@ -48,20 +49,18 @@ class AddTaskPresenter (
         }
     }
 
-    fun postTask(name: String, timeline: String, worker: String){
+    fun changeInvitation(timeline: String,idInvite: String){
         GlobalScope.launch {
             view.loading(true)
-            val response = api.postTask(
-                name,
+            val response = api.changeInvite(
                 timeline,
-                worker,
-                user.id,
+                idInvite,
                 "Bearer " +prefManager.getToken("token")
             )
 
             if (response.isSuccessful){
                 withContext(Dispatchers.Main) {
-                    response.body()?.let { view.responseAddTask(it) }
+                    response.body()?.let { view.responseChangeInvite(it) }
                     view.loading(false)
                 }
             } else {
@@ -81,7 +80,7 @@ class AddTaskPresenter (
 interface AddTaskView {
     fun loading(loading : Boolean)
     fun error (msg: String)
-    fun responseAddTask(response: AddTaskResponse)
+    fun responseChangeInvite(response: UpdateTimelineResponse)
     fun responseAddWorker(response: InviteResponse)
     fun responseId(response: DataUser)
 }

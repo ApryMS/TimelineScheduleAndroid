@@ -37,6 +37,9 @@ data class TimelineItem(
 	@field:SerializedName("status")
 	val status: String,
 
+	@field:SerializedName("statusTask")
+	val statusTask: String,
+
 	@field:SerializedName("updatedAt")
 	val updatedAt: String
 )

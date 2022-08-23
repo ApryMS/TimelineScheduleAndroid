@@ -10,7 +10,6 @@ import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
 import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
-import deploy.com.timelineschedule.ui.home.HomeActivity
 import deploy.com.timelineschedule.ui.login.LoginActivity
 import deploy.com.timelineschedule.ui.login.User
 

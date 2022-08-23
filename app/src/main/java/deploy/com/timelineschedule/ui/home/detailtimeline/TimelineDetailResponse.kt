@@ -94,5 +94,8 @@ data class MakeBy(
 	val position: String,
 
 	@field:SerializedName("email")
-	val email: String
+	val email: String,
+
+	@field:SerializedName("toko")
+	val toko: String
 )

@@ -3,17 +3,14 @@ package deploy.com.timelineschedule.ui.registrasi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.gson.Gson
-import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.ActivityRegistrasiBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
 import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
-import deploy.com.timelineschedule.ui.home.HomeActivity
 import deploy.com.timelineschedule.ui.login.ResponseLogin
 import deploy.com.timelineschedule.ui.login.User
 

@@ -5,8 +5,8 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
@@ -17,10 +17,9 @@ import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
 import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
-import deploy.com.timelineschedule.ui.home.HomeActivity
-import deploy.com.timelineschedule.ui.home.addTask.AddTaskActivity
+import deploy.com.timelineschedule.ui.dashboard.timeline.UpdateTimelineResponse
+import deploy.com.timelineschedule.ui.home.changeinvitation.ChangeInvitationActivity
 import deploy.com.timelineschedule.ui.login.User
-import deploy.com.timelineschedule.ui.task.UpdateTaskResponse
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,11 +37,11 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
 
     }
 
-
     override fun loading(boolean: Boolean) {
         if (boolean) {
             with(binding){
                 pbLoading.visibility = View.VISIBLE
+                btnFinishedTimeline.visibility= View.GONE
                 cvDataInvite.visibility = View.GONE
                 cvDataOwner.visibility = View.GONE
             }
@@ -51,11 +50,13 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
                 pbLoading.visibility = View.GONE
                 cvDataInvite.visibility = View.VISIBLE
                 cvDataOwner.visibility = View.VISIBLE
+
             }
         }
     }
 
     override fun timelineDetailResponse(response: TimelineDetailResponse) {
+
         binding.btnFinishedTimeline.visibility = View.VISIBLE
         val json = PrefManager(this).getString("user_login")
         val user =  Gson().fromJson(json, User::class.java)
@@ -68,6 +69,16 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
             .load(urlImage)
             .placeholder(R.drawable.ic_broken_image_48)
             .into(binding.imageViewTL)
+
+        binding.tvNamePengaju.text = response.timeline.makeBy.name
+        binding.tvTokoDetail.text = response.timeline.makeBy.toko
+
+        if (response.timeline.statusTask == "FINISHED"){
+            binding.textView10.visibility = View.VISIBLE
+            binding.tvTglSelesai.visibility = View.VISIBLE
+            val dateFinish = inputFormat.parse(response.timeline.updatedAt)!!
+            binding.tvTglSelesai.text = outputFormat.format(dateFinish)
+        }
         if (response.timeline.status == "HOLD"){
             binding.btnFinishedTimeline.isEnabled = true
             binding.textView10.visibility = View.GONE
@@ -81,7 +92,7 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
 
         }
         binding.button.setOnClickListener {
-            val intent = Intent(this@DetailActivity, AddTaskActivity::class.java)
+            val intent = Intent(this@DetailActivity, ChangeInvitationActivity::class.java)
             intent.putExtra("idTimeline", response.timeline.id)
             startActivity(intent)
 
@@ -90,20 +101,17 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
 
             val builder = AlertDialog.Builder(this)
             if (response.timeline.invite.id == user.id){
+
                 val view = layoutInflater.inflate(R.layout.dialog_confirm, null)
                 builder.setView(view)
-
                 builder.setPositiveButton("Sudah", DialogInterface.OnClickListener { dialog, which ->
-                    presenter.updateTimeline(response.timeline.id)
-
-
+                    presenter.updateStatusTaskTimeline(response.timeline.id)
                 })
                 builder.setNegativeButton(
                     "Belum",
                     DialogInterface.OnClickListener { dialog, which -> })
                 builder.show()
             } else {
-
                 val view = layoutInflater.inflate(R.layout.dialog_confirm_timeline, null)
                 builder.setView(view)
                 builder.setPositiveButton("Sudah", DialogInterface.OnClickListener { dialog, which ->
@@ -120,6 +128,10 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
         }
 
         if (user.id == response.timeline.invite.id) {
+            if (response.timeline.statusTask == "FINISHED") {
+                binding.btnFinishedTimeline.isEnabled = false
+                binding.btnFinishedTimeline.text = "Sudah Selesai"
+            }
             binding.button.visibility = View.VISIBLE
             binding.btnFinishedTimeline.setText("Tugas Selesai")
 
@@ -136,6 +148,11 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
             val builder = AlertDialog.Builder(this)
             val view = layoutInflater.inflate(R.layout.image_popup, null)
             builder.setView(view)
+            val imageView =  view.findViewById<ImageView>(R.id.iv_popup)
+            Glide.with(applicationContext)
+                .load(urlImage)
+                .placeholder(R.drawable.ic_broken_image_48)
+                .into(imageView)
             builder.show()
         }
 
@@ -146,13 +163,13 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
             tvName.text = response.timeline.name
             tvCreated.text = outputFormat.format(date)
             tvDescroptiom.text = response.timeline.description
-            tvStatus.text = response.timeline.status
+            tvStatus.text = response.timeline.statusTask
             tvNameInvite.text = response.timeline.invite.name
         }
 
     }
 
-    override fun updateTimelineResponse(responseUpdate: UpdateTaskResponse) {
+    override fun updateTimelineResponse(responseUpdate: UpdateTimelineResponse) {
         val json = PrefManager(this).getString("user_login")
         val user =  Gson().fromJson(json, User::class.java)
         Toast.makeText(applicationContext, responseUpdate.message, Toast.LENGTH_SHORT).show()

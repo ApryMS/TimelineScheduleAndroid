@@ -31,11 +31,15 @@ class TimelineAdapter (
             txtJudul.text = timeline.name
             txtInvite.text = "Invite" + " " + timeline.invite.name
             txtDescription.text = timeline.description
-            tvStatus.text = timeline.status
+            tvStatus.text = timeline.statusTask
 
             if (timeline.status == "HOLD"){
                 tvStatus.setTextColor(Color.parseColor("#FF0000"))
                 view.setBackgroundColor(Color.parseColor("#FF0000"))
+            }
+            if (timeline.statusTask == "FINISHED"){
+                tvStatus.setTextColor(Color.parseColor("#FFFF9800"))
+                view.setBackgroundColor(Color.parseColor("#FFFF9800"))
             }
             if (timeline.status == "FINISHED") {
                 tvStatus.setTextColor(Color.parseColor("#1AAF20"))

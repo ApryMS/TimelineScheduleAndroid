@@ -1,27 +1,23 @@
-package deploy.com.timelineschedule.ui.task
+package deploy.com.timelineschedule.ui.home.changeinvitation
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailTaskResponse(
+data class AddTaskResponse(
 
-	@field:SerializedName("data")
-	val data: Data,
-
-	@field:SerializedName("message")
-	val message: String,
+	@field:SerializedName("task")
+	val task: Task,
 
 	@field:SerializedName("status")
 	val status: Boolean
 )
 
-
-data class Data(
+data class Task(
 
 	@field:SerializedName("createdAt")
 	val createdAt: String,
 
 	@field:SerializedName("inviteBy")
-	val inviteBy: InviteBy,
+	val inviteBy: String,
 
 	@field:SerializedName("__v")
 	val V: Int,
@@ -30,7 +26,7 @@ data class Data(
 	val name: String,
 
 	@field:SerializedName("timeline")
-	val timeline: Timeline,
+	val timeline: String,
 
 	@field:SerializedName("_id")
 	val id: String,
@@ -44,5 +40,3 @@ data class Data(
 	@field:SerializedName("updatedAt")
 	val updatedAt: String
 )
-
-

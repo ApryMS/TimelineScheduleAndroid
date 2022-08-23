@@ -52,8 +52,14 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
         })
         binding.rvTimeline.adapter = timelineAdapter
         with(binding) {
+            swipeIt.setOnRefreshListener {
+                presenter.fetchTimelineByIdStatus("HOLD")
+            }
             presenter.fetchTimelineByIdStatus("HOLD")
             btnFinish.setOnClickListener {
+                swipeIt.setOnRefreshListener {
+                    presenter.fetchTimelineByIdStatus("FINISHED")
+                }
                 btnFinish.setBackgroundResource(R.drawable.shape_ractengle_button)
                 btnFinish.setTextColor(Color.WHITE)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractangle_button_un)
@@ -61,6 +67,9 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
                 presenter.fetchTimelineByIdStatus("FINISHED")
             }
             btnProcess.setOnClickListener {
+                swipeIt.setOnRefreshListener {
+                    presenter.fetchTimelineByIdStatus("HOLD")
+                }
                 btnFinish.setBackgroundResource(R.drawable.shape_ractangle_button_un)
                 btnFinish.setTextColor(Color.BLACK)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractengle_button)
@@ -73,7 +82,16 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
     }
 
     override fun loading(boolean: Boolean) {
-        if(boolean) binding.progressBar.visibility = View.GONE else  binding.progressBar.visibility  = View.GONE
+        binding.swipeIt.isRefreshing = boolean
+        if(boolean) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.imgNoData.visibility = View.GONE
+            binding.rvTimeline.visibility = View.GONE
+
+        } else {
+            binding.progressBar.visibility = View.GONE
+
+        }
     }
 
     override fun timelineResponse(response: TimelineResponse) {
