@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.google.gson.Gson
 import deploy.com.timelineschedule.BaseActivity
 import deploy.com.timelineschedule.R
@@ -62,12 +64,15 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
         val user =  Gson().fromJson(json, User::class.java)
         val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.US)
-        val url = "http://192.168.101.18:3000/"
+        val url = "http://45.249.216.57:3000/"
         val image = response.timeline.image.replace("""\""", "/")
         val urlImage = url+image
+        var requestOptions = RequestOptions()
+        requestOptions.signature(ObjectKey(System.currentTimeMillis()))
         Glide.with(applicationContext)
             .load(urlImage)
             .placeholder(R.drawable.ic_broken_image_48)
+            .apply(requestOptions)
             .into(binding.imageViewTL)
 
         binding.tvNamePengaju.text = response.timeline.makeBy.name

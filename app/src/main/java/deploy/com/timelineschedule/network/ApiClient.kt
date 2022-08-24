@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val baseUrl ="http://192.168.101.18:3000/api/v1/"
+private const val baseUrl ="http://45.249.216.57:3000/api/v1/"
 object ApiClient {
     fun getService() : ApiService {
         val logging = HttpLoggingInterceptor()
