@@ -30,7 +30,7 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/layout_toko">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_name"
@@ -68,18 +68,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:hint="Nama Toko"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_email">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <AutoCompleteTextView
             android:id="@+id/et_toko"
-            android:textEditSuggestionItemLayout="@layout/list_timeline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textEditSuggestionItemLayout="@layout/list_timeline"
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,11 +89,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_toko"
+        app:layout_constraintTop_toBottomOf="@+id/layout_email"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
