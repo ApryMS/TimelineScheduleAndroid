@@ -11,6 +11,7 @@ import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.dashboard.DashboardActivity
 import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
+import deploy.com.timelineschedule.ui.login.LoginActivity
 import deploy.com.timelineschedule.ui.login.ResponseLogin
 import deploy.com.timelineschedule.ui.login.User
 
@@ -66,20 +67,9 @@ class RegistrasiActivity : AppCompatActivity(), RegisterView {
 
     override fun response(response: ResponseLogin) {
         presenter.saveLogin(response.data.user, response.data.token)
-
-        val pref = PrefManager(baseContext)
-        val json = pref.getString("user_login")
-        val user = Gson().fromJson(json, User::class.java)
-        if (user.position == "KARYAWAN") {
-            startActivity(Intent(this, DashboardActivity::class.java))
-            finish()
-        } else {
-            startActivity(Intent(this, DashboardITActivity::class.java))
-            finish()
-        }
-
-
-
+        Toast.makeText(applicationContext, "Registrasi Berhasil, Silahkan masuk", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(applicationContext, LoginActivity::class.java))
+        finish()
     }
 
 

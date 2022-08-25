@@ -134,11 +134,15 @@ class DetailActivity : BaseActivity() , DetailViewTImeline {
 
         if (user.id == response.timeline.invite.id) {
             if (response.timeline.statusTask == "FINISHED") {
+                binding.button.visibility = View.GONE
+                binding.warning.visibility = View.GONE
                 binding.btnFinishedTimeline.isEnabled = false
-                binding.btnFinishedTimeline.text = "Sudah Selesai"
+                binding.btnFinishedTimeline.text = "Selesai"
+            } else {
+                binding.button.visibility = View.VISIBLE
+                binding.btnFinishedTimeline.text = "Sudah Selesai ?"
             }
-            binding.button.visibility = View.VISIBLE
-            binding.btnFinishedTimeline.setText("Tugas Selesai")
+
 
 
         } else{
