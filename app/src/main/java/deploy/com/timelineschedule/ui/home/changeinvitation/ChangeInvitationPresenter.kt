@@ -5,6 +5,7 @@ import deploy.com.timelineschedule.network.ApiService
 import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.DataUser
 import deploy.com.timelineschedule.ui.dashboard.timeline.UpdateTimelineResponse
+import deploy.com.timelineschedule.ui.home.addtimeline.AddTimelineResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 import deploy.com.timelineschedule.ui.login.User
 import kotlinx.coroutines.Dispatchers
@@ -74,7 +75,27 @@ class AddTaskPresenter (
 
     }
 
-
+    fun addDiskusi(
+        note: String,
+        timelineId: String,
+        invite: String,
+    ) {
+        GlobalScope.launch {
+            view.loading(true)
+            val res = api.addDiskusi(note, timelineId,user.id, invite, "Bearer " +prefManager.getToken("token"))
+            if (res.isSuccessful) {
+                withContext(Dispatchers.Main) {
+                    res.body()?.let { view.responseAddDiskusi(it) }
+                    view.loading(false)
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    view.error("Terjadi Kesalahan")
+                    view.loading(false)
+                }
+            }
+        }
+    }
 
 }
 interface AddTaskView {
@@ -82,5 +103,6 @@ interface AddTaskView {
     fun error (msg: String)
     fun responseChangeInvite(response: UpdateTimelineResponse)
     fun responseAddWorker(response: InviteResponse)
+    fun responseAddDiskusi(response: AddTimelineResponse)
     fun responseId(response: DataUser)
 }

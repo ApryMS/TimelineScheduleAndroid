@@ -2,7 +2,7 @@
     <string name="app_name">TimelineSchedule</string>
     <string name="tagline">Chandra Superstore Timeline Scadule</string>
     <string name="silahkan_masuk">Silahkan Masuk</string>
-    <string name="email">Email</string>
+    <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="masuk">Masuk</string>
     <string name="dekorasi">Dekorasi</string>
@@ -15,12 +15,7 @@
     <string name="tanggal_dibuat">Tanggal Dibuat</string>
     <string name="deskripsi">Deskripsi</string>
     <string name="status">Status</string>
-    <string name="judul">Judul</string>
+    <string name="kategori">Kategori Perbaikan</string>
     <string name="invite">Invite</string>
     <string name="keluar">Keluar</string>
-
-    <string-array name="position">
-        <item>IT STAFF</item>
-        <item>OTHERS..</item>
-    </string-array>
 </resources>

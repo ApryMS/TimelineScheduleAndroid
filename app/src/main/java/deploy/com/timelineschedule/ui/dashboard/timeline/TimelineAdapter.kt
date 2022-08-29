@@ -32,6 +32,7 @@ class TimelineAdapter (
             txtInvite.text = "Invite" + " " + timeline.invite.name
             txtDescription.text = timeline.description
             tvStatus.text = timeline.statusTask
+            txtToko.text = timeline.makeBy.toko
 
             if (timeline.status == "HOLD"){
                 tvStatus.setTextColor(Color.parseColor("#FF0000"))

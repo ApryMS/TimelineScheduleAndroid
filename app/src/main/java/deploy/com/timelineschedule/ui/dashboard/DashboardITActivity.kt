@@ -12,6 +12,10 @@ import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.ActivityDashboardItactivityBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.dashboard.diskusi.DiskusiAdapter
+import deploy.com.timelineschedule.ui.dashboard.diskusi.DiskusiItem
+import deploy.com.timelineschedule.ui.dashboard.diskusi.ResponseGetListDiskusi
+import deploy.com.timelineschedule.ui.dashboard.diskusi.detail.DetailDiskusiActivity
 import deploy.com.timelineschedule.ui.dashboard.timeline.*
 import deploy.com.timelineschedule.ui.home.detailtimeline.DetailActivity
 import deploy.com.timelineschedule.ui.login.LoginActivity
@@ -21,6 +25,7 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
     private val binding by lazy { ActivityDashboardItactivityBinding.inflate(layoutInflater) }
     private lateinit var presenter : TimelinePresenter
     private lateinit var timelineAdapter: TimelineAdapter
+    private lateinit var diskusiAdapter: DiskusiAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -51,12 +56,24 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
 
         })
         binding.rvTimeline.adapter = timelineAdapter
+
+        diskusiAdapter = DiskusiAdapter(arrayListOf(), object : DiskusiAdapter.OnAdapterListener{
+            override fun onClick(diskusi: DiskusiItem) {
+                val intent = Intent(this@DashboardITActivity , DetailDiskusiActivity::class.java)
+                intent.putExtra("idDiskusi", diskusi.id)
+                startActivity(intent)
+            }
+
+        })
+        binding.rvDiskusi.adapter = diskusiAdapter
+
         with(binding) {
             swipeIt.setOnRefreshListener {
                 presenter.fetchTimelineByIdStatus("HOLD")
             }
             presenter.fetchTimelineByIdStatus("HOLD")
             btnFinish.setOnClickListener {
+                rvDiskusi.visibility = View.GONE
                 swipeIt.setOnRefreshListener {
                     presenter.fetchTimelineByIdStatus("FINISHED")
                 }
@@ -64,9 +81,12 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
                 btnFinish.setTextColor(Color.WHITE)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractangle_button_un)
                 btnProcess.setTextColor(Color.BLACK)
+                btnDiskusi.setBackgroundResource(R.drawable.shape_ractangle_button_un)
+                btnDiskusi.setTextColor(Color.BLACK)
                 presenter.fetchTimelineByIdStatus("FINISHED")
             }
             btnProcess.setOnClickListener {
+                rvDiskusi.visibility = View.GONE
                 swipeIt.setOnRefreshListener {
                     presenter.fetchTimelineByIdStatus("HOLD")
                 }
@@ -74,8 +94,29 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
                 btnFinish.setTextColor(Color.BLACK)
                 btnProcess.setBackgroundResource(R.drawable.shape_ractengle_button)
                 btnProcess.setTextColor(Color.WHITE)
+                btnDiskusi.setBackgroundResource(R.drawable.shape_ractangle_button_un)
+                btnDiskusi.setTextColor(Color.BLACK)
                 presenter.fetchTimelineByIdStatus("HOLD")
             }
+
+            btnDiskusi.setOnClickListener {
+                swipeIt.setOnRefreshListener {
+                    presenter.fetchGetDiskusiByUser()
+                }
+                presenter.fetchGetDiskusiByUser()
+                rvTimeline.visibility = View.GONE
+                rvDiskusi.visibility = View.VISIBLE
+                swipeIt.setOnRefreshListener {
+                    presenter.fetchGetDiskusiByUser()
+                }
+                btnFinish.setBackgroundResource(R.drawable.shape_ractangle_button_un)
+                btnFinish.setTextColor(Color.BLACK)
+                btnProcess.setBackgroundResource(R.drawable.shape_ractangle_button_un)
+                btnProcess.setTextColor(Color.BLACK)
+                btnDiskusi.setBackgroundResource(R.drawable.shape_ractengle_button)
+                btnDiskusi.setTextColor(Color.WHITE)
+            }
+
         }
 
 
@@ -106,6 +147,20 @@ class DashboardITActivity : AppCompatActivity(), TimelineView {
             binding.txtNodata.visibility = View.VISIBLE
         }
 
+
+    }
+
+    override fun getListDiskusiResponse(response: ResponseGetListDiskusi) {
+        Log.d("GetDiskusi", response.toString())
+        if (response.diskusi.isNotEmpty()){
+            binding.rvDiskusi.visibility = View.VISIBLE
+            binding.imgNoData.visibility = View.GONE
+            binding.txtNodata.visibility = View.GONE
+            diskusiAdapter.addList(response.diskusi)
+        } else {
+            binding.imgNoData.visibility = View.VISIBLE
+            binding.txtNodata.visibility = View.VISIBLE
+        }
 
     }
 

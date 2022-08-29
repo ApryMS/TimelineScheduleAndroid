@@ -15,8 +15,10 @@
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard.xml" value="0.1644021739130435" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_dashboard_itactivity.xml" value="0.2" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail.xml" value="0.33" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail_diskusi.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_detail_task.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_list_diskusi.xml" value="0.15670289855072464" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_registrasi.xml" value="0.33" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/activity_splash_screen.xml" value="0.17074275362318841" />
@@ -28,6 +30,7 @@
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/fragment_task.xml" value="0.17074275362318841" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/image_popup.xml" value="0.14583333333333334" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/item_invite.xml" value="0.15534420289855072" />
+        <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_diskusi.xml" value="0.25" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_invite.xml" value="0.15534420289855072" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_task.xml" value="0.258252427184466" />
         <entry key="..\:/apry/android/TimelineSchedule/app/src/main/res/layout/list_timeline.xml" value="0.33" />

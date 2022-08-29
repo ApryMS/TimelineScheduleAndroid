@@ -65,14 +65,26 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_finish"
-        android:background="@drawable/shape_ractangle_button_un"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/shape_ractangle_button_un"
         android:text="@string/selesai"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/btn_process"
         app:layout_constraintStart_toEndOf="@+id/btn_process"
+        app:layout_constraintTop_toTopOf="@+id/btn_process" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_diskusi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/shape_ractangle_button_un"
+        android:text="Diskusi"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_process"
+        app:layout_constraintStart_toEndOf="@+id/btn_finish"
         app:layout_constraintTop_toTopOf="@+id/btn_process" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -92,7 +104,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_process"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/list_timeline" />
+        tools:listitem="@layout/list_timeline" >
+    </androidx.recyclerview.widget.RecyclerView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_diskusi"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_process"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/list_diskusi" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <ProgressBar
         android:id="@+id/progressBar"

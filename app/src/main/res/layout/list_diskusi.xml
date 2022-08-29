@@ -18,7 +18,7 @@
         android:layout_height="200dp">
 
         <TextView
-            android:id="@+id/txt_judul"
+            android:id="@+id/tv_kategori"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,12 +27,11 @@
             android:text="@string/dummy_name"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tv_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_invite"
+            android:id="@+id/tv_diskusi_make"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -40,12 +39,11 @@
             android:layout_marginEnd="8dp"
             android:text="@string/dummy_name"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_status"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_toko" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_diskusi_invite" />
 
         <TextView
-            android:id="@+id/txt_toko"
+            android:id="@+id/tv_diskusi_invite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,9 +51,8 @@
             android:layout_marginEnd="8dp"
             android:text="@string/dummy_name"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_status"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_judul" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_kategori" />
 
         <View
             android:id="@+id/view"
@@ -66,10 +63,10 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_invite" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_diskusi_make" />
 
         <TextView
-            android:id="@+id/txt_description"
+            android:id="@+id/tv_note"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -94,18 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
-        <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="TextView"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_invite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_judul" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.cardview.widget.CardView

@@ -30,6 +30,7 @@ class AddActivity : BaseActivity(), AddTimelineView {
     private lateinit var presenter : AddTimelinePresenter
     private lateinit var codes : ArrayList<String>
     var idEmployee : String? = null
+    var kategori : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -43,7 +44,19 @@ class AddActivity : BaseActivity(), AddTimelineView {
                 .maxResultSize(1080, 1080)
                 .start()
         }
-
+        val arrayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item,
+            arrayListOf(
+                "Perangkat (Admin dan Server)",
+                "Sistem dan Data (Admin dan Server)",
+                "Perangkat POS",
+                "Sistem dan Data POS" ,
+                "Absensi",
+                "Internet")
+            )
+        binding.etKategory.setAdapter(arrayAdapter)
+        binding.etKategory.setOnItemClickListener { adapterView, view, i, l ->
+            kategori = adapterView.getItemAtPosition(i).toString()
+        }
     }
     override fun setupListener() {
         binding.btnSubmit.setOnClickListener {
@@ -101,8 +114,7 @@ class AddActivity : BaseActivity(), AddTimelineView {
     }
     private fun addTimeline() {
         with(binding){
-
-            if (etJudul.text !== null && etDeskripsi.text !== null && idEmployee !== null && FOTO_URI !== null){
+            if (kategori !== null && etDeskripsi.text !== null && idEmployee !== null && FOTO_URI !== null){
                 val pathPhoto = URIPathHelper.getRealPath(this@AddActivity, FOTO_URI!!).toString()
                 val imageFile = File(pathPhoto)
                 Log.e("namaFile", imageFile.name)
@@ -111,7 +123,7 @@ class AddActivity : BaseActivity(), AddTimelineView {
                 Log.e("namaFile", imageRequestBody.toString())
                 val image = MultipartBody.Part.createFormData("file", imageFile.name, imageRequestBody)
                 Log.e("cekImageActibiti", image.toString())
-                val judul = RequestBody.create("text/plain".toMediaTypeOrNull(), etJudul.text.toString().trim())
+                val judul = RequestBody.create("text/plain".toMediaTypeOrNull(), kategori.toString())
                 val deskripsi = RequestBody.create("text/plain".toMediaTypeOrNull(), etDeskripsi.text.toString().trim())
                 val id_employe = RequestBody.create("text/plain".toMediaTypeOrNull(), idEmployee.toString())
                 presenter.postTimeline(image, judul, deskripsi, id_employe

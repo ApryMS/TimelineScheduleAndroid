@@ -11,6 +11,7 @@ import deploy.com.timelineschedule.R
 import deploy.com.timelineschedule.databinding.ActivityDashboardBinding
 import deploy.com.timelineschedule.network.ApiClient
 import deploy.com.timelineschedule.preference.PrefManager
+import deploy.com.timelineschedule.ui.dashboard.diskusi.ResponseGetListDiskusi
 import deploy.com.timelineschedule.ui.dashboard.timeline.*
 import deploy.com.timelineschedule.ui.home.addtimeline.AddActivity
 import deploy.com.timelineschedule.ui.home.detailtimeline.DetailActivity
@@ -104,6 +105,10 @@ class DashboardActivity : AppCompatActivity(), TimelineView {
         }
 
 
+    }
+
+    override fun getListDiskusiResponse(response: ResponseGetListDiskusi) {
+        //write hire
     }
 
     override fun error(msg: String) {

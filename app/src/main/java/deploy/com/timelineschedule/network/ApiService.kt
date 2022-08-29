@@ -1,6 +1,8 @@
 package deploy.com.timelineschedule.network
 
 import deploy.com.timelineschedule.ui.DataUser
+import deploy.com.timelineschedule.ui.dashboard.diskusi.ResponseGetListDiskusi
+import deploy.com.timelineschedule.ui.dashboard.diskusi.detail.ResponseDetailDiskusi
 import deploy.com.timelineschedule.ui.dashboard.timeline.TimelineResponse
 import deploy.com.timelineschedule.ui.dashboard.timeline.UpdateTimelineResponse
 import deploy.com.timelineschedule.ui.home.changeinvitation.AddTaskResponse
@@ -35,6 +37,13 @@ interface ApiService {
         @Query("status") status : String,
         @Header("Authorization") token : String
     ) : Response<TimelineResponse>
+
+    @GET("diskusi/detail-diskusi")
+    suspend fun getDetailDiskusi(
+        @Query("idDiskusi") idDiskusi : String,
+        @Header("Authorization") token : String
+    ) : Response<ResponseDetailDiskusi>
+
 
     @GET("timeline/detail-timeline")
     suspend fun getDetailTimeline(
@@ -103,5 +112,31 @@ interface ApiService {
         @Field("password") password: String,
         @Field("toko") nameToko: String
     ) : Response<ResponseLogin>
+
+    @FormUrlEncoded
+    @POST("diskusi/add-diskusi")
+    suspend fun addDiskusi(
+        @Field("note") note :String,
+        @Field("timeline") idTimeline: String,
+        @Field("makeBy") makeBy: String,
+        @Field("invite") invite: String,
+        @Header("Authorization") token: String
+    ) : Response<AddTimelineResponse>
+
+    @FormUrlEncoded
+    @POST("diskusi/komentar-diskusi")
+    suspend fun komentarDiskusi(
+        @Field("diskusiId") note :String,
+        @Field("userId") idTimeline: String,
+        @Field("komen") makeBy: String,
+        @Header("Authorization") token: String
+    ) : Response<AddTimelineResponse>
+
+
+    @GET("diskusi/get-diskusi-by-iduser")
+    suspend fun getDiskusiByUser(
+        @Query("idUser") idUser : String,
+        @Header("Authorization") token : String
+    ) : Response<ResponseGetListDiskusi>
 
 }

@@ -15,6 +15,7 @@ import deploy.com.timelineschedule.preference.PrefManager
 import deploy.com.timelineschedule.ui.DataUser
 import deploy.com.timelineschedule.ui.dashboard.DashboardITActivity
 import deploy.com.timelineschedule.ui.dashboard.timeline.UpdateTimelineResponse
+import deploy.com.timelineschedule.ui.home.addtimeline.AddTimelineResponse
 import deploy.com.timelineschedule.ui.home.addtimeline.InviteResponse
 
 class ChangeInvitationActivity : AppCompatActivity(), AddTaskView {
@@ -50,6 +51,7 @@ class ChangeInvitationActivity : AppCompatActivity(), AddTaskView {
         }
     }
 
+
     override fun responseId(response: DataUser) {
         idEmployee = response.id
     }
@@ -69,7 +71,16 @@ class ChangeInvitationActivity : AppCompatActivity(), AddTaskView {
 
     }
     override fun responseChangeInvite(response: UpdateTimelineResponse) {
-        Toast.makeText(applicationContext, "Mengganti Invitation Berhasil", Toast.LENGTH_SHORT).show()
+        val idTimeline = intent.getStringExtra("idTimeline")
+        presenter.addDiskusi(
+            binding.etCatetan.text.toString(),
+            idTimeline!!,
+            idEmployee!!,
+        )
+
+    }
+    override fun responseAddDiskusi(response: AddTimelineResponse) {
+        Toast.makeText(applicationContext, "Berhasil mengganti invitation", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, DashboardITActivity::class.java))
         finish()
     }
