@@ -126,9 +126,18 @@ interface ApiService {
     @FormUrlEncoded
     @POST("diskusi/komentar-diskusi")
     suspend fun komentarDiskusi(
-        @Field("diskusiId") note :String,
-        @Field("userId") idTimeline: String,
-        @Field("komen") makeBy: String,
+        @Field("diskusiId") diskusiId :String,
+        @Field("userId") userId: String,
+        @Field("komen") komentar: String,
+        @Header("Authorization") token: String
+    ) : Response<AddTimelineResponse>
+
+
+    @FormUrlEncoded
+    @POST("diskusi/delete-diskusi")
+    suspend fun deleteDiskusi(
+        @Field("idUser") idUser :String,
+        @Field("idDiskusi") idDiskusi: String,
         @Header("Authorization") token: String
     ) : Response<AddTimelineResponse>
 

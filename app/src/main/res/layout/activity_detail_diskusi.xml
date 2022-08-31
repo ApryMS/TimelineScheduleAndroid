@@ -223,7 +223,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_komentar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="300dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -236,15 +237,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Tambah Komentar"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/btn_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_komentar" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="32dp"
-            android:text="Tambah Komentar"
+            android:backgroundTint="@color/red"
+            android:text="Hapus Diskusi"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_komentar" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_coment" />
 
         <ProgressBar
             android:id="@+id/pb_diskusi"

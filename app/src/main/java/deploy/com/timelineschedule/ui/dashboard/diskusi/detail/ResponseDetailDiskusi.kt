@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseDetailDiskusi(
 
+	@field:SerializedName("komentar")
+	val komentar: List<KomentarItem>,
+
 	@field:SerializedName("message")
 	val message: String,
 
@@ -12,6 +15,39 @@ data class ResponseDetailDiskusi(
 
 	@field:SerializedName("status")
 	val status: Boolean
+)
+
+data class Invite(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("_id")
+	val id: String
+)
+
+data class KomentarItem(
+
+	@field:SerializedName("createdAt")
+	val createdAt: String,
+
+	@field:SerializedName("komen")
+	val komen: String,
+
+	@field:SerializedName("__v")
+	val V: Int,
+
+	@field:SerializedName("diskusiId")
+	val diskusiId: String,
+
+	@field:SerializedName("_id")
+	val id: String,
+
+	@field:SerializedName("userId")
+	val userId: UserId,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String
 )
 
 data class Timeline(
@@ -50,6 +86,15 @@ data class Timeline(
 	val updatedAt: String
 )
 
+data class MakeBy(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("_id")
+	val id: String
+)
+
 data class Diskusi(
 
 	@field:SerializedName("note")
@@ -77,16 +122,7 @@ data class Diskusi(
 	val updatedAt: String
 )
 
-data class MakeBy(
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("_id")
-	val id: String
-)
-
-data class Invite(
+data class UserId(
 
 	@field:SerializedName("name")
 	val name: String,
